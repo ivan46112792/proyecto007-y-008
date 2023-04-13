@@ -1,28 +1,19 @@
-import FormularioNumeros from "./FormularioNumeros";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 
 function App() {
 
-  const [operaciones, setOperacion] = useState([])
+  const [texto, setTexto] = useState("")
 
-  function sumar(event) {
-    event.preventDefault();
-    const v1 = parseInt(event.target.valor1.value, 10)
-    const v2 = parseInt(event.target.valor2.value, 10)
-    const suma = v1 + v2
-    const nuevo = {
-      resultado: suma,
-      valor1: v1,
-      valor2: v2
-    }
-    setOperacion([nuevo, ...operaciones])
-    event.target.valor1.value = ''
-    event.target.valor2.value = ''
+  useEffect(() => {document.title = texto}, [texto])
+
+  function cambiar(e) {
+    setTexto(e.target.value)
   }
 
   return (
     <div>
-      <FormularioNumeros onSumar={sumar} />
+      <p><input type="text" onChange={cambiar} /></p>
+      <p>{texto}</p>
     </div>
   );
 }
